@@ -1,7 +1,4 @@
-# hello-world
-This is my new repository
-
-/* Project Goals
+# Project Goals
 
 Paste raw data from journal.txt in and prase the items and quantities from it. For example below
 
@@ -58,4 +55,4 @@ What we ned to do is grab the Name of the Roller and their Roll. We have the add
 The GUI Webapp
 
 Goal would be to have two fields a user can dump this into and hit a button that will then display The loot and how many of each item we have. So it produces a loot table basically.
-*/
+
