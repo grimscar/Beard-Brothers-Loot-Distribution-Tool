@@ -42,7 +42,7 @@ function makeTable(str){
         newTable.appendChild(document.createElement("tr"));
         element.forEach(el => {
             let cell = document.createElement("td");
-            let cellText = document.createTextNode(element);
+            let cellText = document.createTextNode(el);
             cell.appendChild(cellText);
             newTable.appendChild(cell);
         })
