@@ -6,8 +6,7 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     
     //This function returns the table want to show
     let childAppend = makeTable(inputData);
-    document.querySelector('body').appendChild(childAppend);
-
+    document.getElementById('output-journal').replaceWith(childAppend);
 
     toggleInputTableVisibility();
     
@@ -22,6 +21,7 @@ function toggleInputTableVisibility(){
     document.getElementById('bJournal').classList.add("hide");
 }
 
+//takes input of a string and returns a table based on that
 function makeTable(str){
     let newTable = document.createElement("table");
     // https://stackoverflow.com/questions/14643617/create-table-using-javascript
@@ -29,12 +29,23 @@ function makeTable(str){
     //stand in until we get regex
     let array = str.split(" ");
 
+    //array for testing
+    array = [
+        ['a', 'b', 'c', 'd'],
+        [1, 2, 3, 4],
+        ['apple', 'cat', 'fox', 'tree']
+    ]
+
     //the next few lines set each word in the input as a separate td
+    //it expects array to be a 2 dimensional array
     array.forEach(element => {
-        let cell = document.createElement("td");
-        let cellText = document.createTextNode(element);
-        cell.appendChild(cellText);
-        newTable.appendChild(cell);
+        newTable.appendChild(document.createElement("tr"));
+        element.forEach(el => {
+            let cell = document.createElement("td");
+            let cellText = document.createTextNode(element);
+            cell.appendChild(cellText);
+            newTable.appendChild(cell);
+        })
     });
 
     return newTable;
