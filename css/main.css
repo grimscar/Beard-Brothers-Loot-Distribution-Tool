@@ -4,11 +4,11 @@ body {
     max-width: 800px;
 }
 
-#input-field {
+.input-field {
     width: 800px;
 }
 
-#nbutton {
+.input-button {
     color: white;
     background-color: black;
     border-radius: 1em;
@@ -18,4 +18,8 @@ table, th, td {
     border: 1px solid slateblue;
     background-color: black;
     color: white;
-  }
+}
+
+.hide {
+    visibility: hidden;
+}

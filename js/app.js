@@ -1,21 +1,16 @@
 
-
-
-/**
- * Parser functions
- * takes in input in the first text box and sets up the table with the values seen
- * in the source
- */
-
-document.querySelector('#nButton').addEventListener('click', function(event){
-    document.querySelector('#num').innerHTML += 1;
+// Event listener for the journal input button
+document.querySelector('#bJournal').addEventListener('click', function(event){
     switchInputToTable();
 });
 
+//change the table to show instead of the input field
 function switchInputToTable(){
-    let inp = document.querySelector('#input-field');
-    let otb = document.querySelector('#output-table');
+    //grab the two objects (table and input field)
+    let inp = document.querySelector('#input-journal');
+    let otb = document.querySelector('#output-journal');
 
+    //assumes that one starts hidden
     inp.classList.toggle('hide');
     otb.classList.toggle('hide');
 }
