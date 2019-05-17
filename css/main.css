@@ -24,6 +24,10 @@ table, th, td {
     visibility: hidden;
 }
 
+textarea {
+    resize: none;
+  }
+
 /*
 * Responsive Layouts
 */
