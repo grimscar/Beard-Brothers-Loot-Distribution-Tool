@@ -56,3 +56,11 @@ The GUI Webapp
 
 Goal would be to have two fields a user can dump this into and hit a button that will then display The loot and how many of each item we have. So it produces a loot table basically.
 
+ItemList.json resources
+/*
+Reference Material
+http://stewd.io/javascript/06-1-databases.html
+https://www.youtube.com/watch?v=iiADhChRriM
+
+This area here contains all of our items in arrays of Type:Item
+*/
