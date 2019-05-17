@@ -14,13 +14,10 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
 //change the table to show instead of the input field
 function toggleInputTableVisibility(){
     
-    //grab the two objects (table and input field)
-    let inp = document.querySelector('#input-journal');
-    let otb = document.querySelector('#output-journal');
-
-    //assumes that one starts hidden
-    inp.classList.toggle('hide');
-    otb.classList.toggle('hide');
+    //hide the input and button while showing the table
+    document.getElementById('input-journal').classList.add("hide");
+    document.getElementById('output-journal').classList.remove("hide");
+    document.getElementById('bjournal').classList.add("hide");
 }
 
 function makeTable(str){
