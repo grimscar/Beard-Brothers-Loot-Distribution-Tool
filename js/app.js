@@ -6,7 +6,7 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     
     //This function returns the table want to show
     let childAppend = makeTable(inputData);
-
+    document.querySelector('body').appendChild(childAppend);
     toggleInputTableVisibility();
     
 });
