@@ -1,6 +1,6 @@
 
 // Event listener for the journal input button
-document.querySelector('#bjournal').addEventListener('click', function(event){
+document.querySelector('#bJournal').addEventListener('click', function(event){
     //get the text from the input field
     let inputData = document.querySelector("#input-journal").value;
     
@@ -19,7 +19,7 @@ function toggleInputTableVisibility(){
     //hide the input and button while showing the table
     document.getElementById('input-journal').classList.add("hide");
     document.getElementById('output-journal').classList.remove("hide");
-    document.getElementById('bjournal').classList.add("hide");
+    document.getElementById('bJournal').classList.add("hide");
 }
 
 function makeTable(str){
