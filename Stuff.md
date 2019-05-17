@@ -1,3 +1,4 @@
+#Dice Rollem Stuff
 
 ^(.+), \d+ ⟵ [(\d)]1d100$
 args[0] args[1]
@@ -12,6 +13,9 @@ args[0] args[1]
 @Bashful/Sicario, 12 ⟵ [12]1d100
 @Weebus, 'shadowstone', 60 ⟵ [60]1d100
 @[BB]SumDood/mongrel, 71 ⟵ [71]1d100
+
+
+#Journal.txt Stuff
 
 ^You see: (.+) : (\d+)$  <Matches A> 
 args[0] args[1]
