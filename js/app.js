@@ -17,7 +17,7 @@ function toggleInputTableVisibility(){
     //hide the input and button while showing the table
     document.getElementById('input-journal').classList.add("hide");
     document.getElementById('output-journal').classList.remove("hide");
-    document.getElementById('bjournal').classList.add("hide");
+    document.getElementById('bJournal').classList.add("hide");
 }
 
 function makeTable(str){
