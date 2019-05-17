@@ -9,6 +9,7 @@
     "Research Materials",
     "Shimmer Evergreen Cloth"
     ],
+
     "Cores":[
     "Air Aspect Core",
     "Artisan Aspect Core",
@@ -23,6 +24,7 @@
     "Void Aspect Core",
     "Water Aspect Core"
     ],
+
     "Extract":[
     "Air Aspect Extract",
     "Artisan Aspect Extract",
@@ -37,6 +39,7 @@
     "Void Aspect Extract",
     "Water Aspect Extract"
     ],
+
     "Phlactery":[
     "Air Phylactery",
     "Artisan Phylactery",
@@ -51,6 +54,7 @@
     "Void Phylactery",
     "Water Phylactery"
     ],
+
     "SkillScroll":[
     "Alchemy Skill Mastery Scroll",
     "Animal Lore Skill Mastery Scroll",
@@ -84,6 +88,7 @@
     "Tracking Skill Mastery Scroll",
     "Veterinary Skill Mastery Scroll"
     ],
+
     "TreasureMap":[
     "Plainly Drawn Fishing Map",
     "Expertly Drawn Fishing Map",
@@ -102,6 +107,7 @@
     "Diabolically Drawn Treasure Map: Level 7",
     "Legendarily Drawn Treasure Map: Level 8"
     ],
+    
     "ResourceMap": [
     "Dull Copper Ore Map",
     "Shadow Ore Map",
