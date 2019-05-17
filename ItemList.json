@@ -1,3 +1,10 @@
+/*
+Reference Material
+http://stewd.io/javascript/06-1-databases.html
+
+This area here contains all of our items in arrays of Type:Item
+*/
+
 {
     "Misc":[
     "A Skill Mastery Orb",
@@ -107,7 +114,7 @@
     "Diabolically Drawn Treasure Map: Level 7",
     "Legendarily Drawn Treasure Map: Level 8"
     ],
-    
+
     "ResourceMap": [
     "Dull Copper Ore Map",
     "Shadow Ore Map",
