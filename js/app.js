@@ -16,9 +16,9 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
 function toggleInputTableVisibility(){
     
     //hide the input and button while showing the table
-    document.getElementById('input-journal').classList.add("hide");
-    //document.getElementById('output-journal').classList.remove("hide");
-    document.getElementById('bJournal').classList.add("hide");
+    //document.getElementById('input-journal').classList.add("hide");
+    //document.getElementById('bJournal').classList.add("hide");
+    document.getElementById('d-input-journal').classList.add("hide");
 }
 
 //takes input of a string and returns a table based on that
@@ -63,6 +63,7 @@ function parse(str){
     return out;
 }
 
+//Adds the finished table to the page
 function addTable(tbl)
 {
     document.getElementById('output-journal').replaceWith(tbl);
