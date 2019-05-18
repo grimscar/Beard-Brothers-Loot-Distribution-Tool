@@ -6,8 +6,8 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     
     //This function returns the table want to show
     let childAppend = makeTable(inputData);
-    document.getElementById('output-journal').replaceWith(childAppend);
-
+    
+    addTable(childAppend);
     toggleInputTableVisibility();
     
 });
@@ -26,7 +26,7 @@ function makeTable(str){
     let newTable = document.createElement("table");
     // https://stackoverflow.com/questions/14643617/create-table-using-javascript
     
-    //stand in until we get regex
+    //gets the array we are going to translate into the table
     let array = parse(str);
 
     //the next few lines set each word in the input as a separate td
@@ -46,7 +46,6 @@ function makeTable(str){
 
 //takes in a string and returns a 2d array based on parsing out each line as a separate row
 function parse(str){
-    debugger;
     //what we are returning
     let out = [];
 
@@ -56,21 +55,17 @@ function parse(str){
     // make the initial array by spliting each line
     out = str.split('\n');
 
-    //go through the array and split each element into its own array
+    //go through the array and split each element into its own array based on p
     for (let i = 0; i < out.length; i++){
         let tempString = out[i];
         out[i] = tempString.split(p);
     }
-    /*out.forEach(element => {
-        element.replaceWith(element.split(p));
-    });*/
     return out;
 }
 
 function addTable(tbl)
 {
-    let divE = document.querySelector(".data-section").querySelector('table').firstChild;
-
+    document.getElementById('output-journal').replaceWith(tbl);
 }
 
 /**
