@@ -12,9 +12,9 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     
 });
 
-document2.querySelector('#bJournal').addEventListener('click', function(event){
+document2.querySelector('#bRollem').addEventListener('click', function(event){
     //get the text from the input field
-    let inputData2 = document2.querySelector("#input-journal").value;
+    let inputData2 = document2.querySelector("#output-rollem").value;
     
     //This function returns the table want to show
     let childAppend2 = makeTable(inputData2);
