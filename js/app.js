@@ -6,8 +6,8 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     
     //This function returns the table want to show
     let childAppend = makeTable(inputData);
-    document.getElementById('output-journal').replaceWith(childAppend);
-
+    
+    addTable(childAppend);
     toggleInputTableVisibility();
     
 });
@@ -16,46 +16,216 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
 function toggleInputTableVisibility(){
     
     //hide the input and button while showing the table
-    document.getElementById('input-journal').classList.add("hide");
-    //document.getElementById('output-journal').classList.remove("hide");
-    document.getElementById('bJournal').classList.add("hide");
+    //document.getElementById('input-journal').classList.add("hide");
+    //document.getElementById('bJournal').classList.add("hide");
+    document.getElementById('d-input-journal').classList.add("hide");
 }
 
 //takes input of a string and returns a table based on that
-function makeTable(str){
+function makeTable(inputData){
     let newTable = document.createElement("table");
     // https://stackoverflow.com/questions/14643617/create-table-using-javascript
     
-    //stand in until we get regex
-    let array = str.split(" ");
+    //gets the array we are going to translate into the table
+    let array = parse(inputData);
 
-    //array for testing
-    array = [
-        ['a', 'b', 'c', 'd'],
-        [1, 2, 3, 4],
-        ['apple', 'cat', 'fox', 'tree']
-    ]
+    array = isOnLootTable(array);
 
     //the next few lines set each word in the input as a separate td
     //it expects array to be a 2 dimensional array
     array.forEach(element => {
-        newTable.appendChild(document.createElement("tr"));
-        element.forEach(el => {
-            let cell = document.createElement("td");
-            let cellText = document.createTextNode(el);
-            cell.appendChild(cellText);
-            newTable.appendChild(cell);
-        })
+
+        //check that its on the table before adding the line
+        {
+        
+            newTable.appendChild(document.createElement("tr"));
+            element.forEach(el => {
+                    let cell = document.createElement("td");
+                    let cellText = document.createTextNode(el);
+                    cell.appendChild(cellText);
+                    if (cell.textContent.length > 0){
+                        newTable.appendChild(cell);
+                    }
+            })
+        }
     });
 
     return newTable;
 }
 
+//takes in a string and returns a 2d array based on parsing out each line as a separate row
+function parse(inputData){
+    //what we are returning
+    let output = [];
+    
+    //what we are parsing against
+    let parseRegex = /^You see: ([^:0-9]+\b) ?:? ?(\d+)?$/;
+
+    //The regex for the Rollem
+    //let parseRollemRegex = /@(.+), \d+ ⟵ [(\d+)]1d100/;
+    // First () Captures Name second () captures their roll. They need to show from high roll to lowest
+    
+    // make the initial array by spliting each line
+    output = inputData.split('\n');
+
+    //go through the array and split each element into its own array based on p
+    for (let i = 0; i < output.length; i++){
+        let tempString = output[i];
+        output[i] = tempString.split(parseRegex);
+    }
+    return output;
+}
+
+//Checks each item in array to make sure its on the item list and it fixes quantities
+function isOnLootTable(array){
+    let output = [];
+
+   array.forEach(element => {
+        //check to see if the item is on the list
+
+        //had issue with regex capturing extra whitespace
+        //put this in to clear up any errant whitespace
+            itemList.forEach(item =>  {
+                if (element[1] == item || element[1] == item + " ")
+                {
+                    if (element[2] == undefined)
+                        element[2] = 1;
+                    output.push(element);
+                }
+        });
+   });
+   return output;
+}
+
+//Adds the finished table to the page
 function addTable(tbl)
 {
-    let divE = document.querySelector(".data-section").querySelector('table').firstChild;
-
+    document.getElementById('output-journal').replaceWith(tbl);
 }
+
+
+// Item list definition
+
+var itemList = [
+    "A Skill Mastery Orb",
+    "Aegis Keep Cloth",
+    "Dark Forest Cloth",
+    "Mastercrafting Diagram",
+    "Metallic Umber Cloth",
+    "Mount Petram Cloth",
+    "Research Materials",
+    "Shimmer Evergreen Cloth",
+    "Air Aspect Core",
+    "Artisan Aspect Core",
+    "Command Aspect Core",
+    "Earth Aspect Core",
+    "Eldritch Aspect Core",
+    "Fire Aspect Core",
+    "Fortune Aspect Core",
+    "Lyric Aspect Core",
+    "Poison Aspect Core",
+    "Shadow Aspect Core",
+    "Void Aspect Core",
+    "Water Aspect Core",
+    "Air Aspect Extract",
+    "Artisan Aspect Extract",
+    "Command Aspect Extract",
+    "Earth Aspect Extract",
+    "Eldritch Aspect Extract",
+    "Fire Aspect Extract",
+    "Fortune Aspect Extract",
+    "Lyric Aspect Extract",
+    "Poison Aspect Extract",
+    "Shadow Aspect Extract",
+    "Void Aspect Extract",
+    "Water Aspect Extract",
+    "Air Phylactery",
+    "Artisan Phylactery",
+    "Command Phylactery",
+    "Earth Phylactery",
+    "Eldritch Phylactery",
+    "Fire Phylactery",
+    "Fortune Phylactery",
+    "Lyric Phylactery",
+    "Poison Phylactery",
+    "Shadow Phylactery",
+    "Void Phylactery",
+    "Water Phylactery",
+    "Alchemy Skill Mastery Scroll",
+    "Animal Lore Skill Mastery Scroll",
+    "Animal Taming Skill Mastery Scroll",
+    "Arms Lore Skill Mastery Scroll",
+    "Begging Skill Mastery Scroll",
+    "Blacksmithy Skill Mastery Scroll",
+    "Camping Skill Mastery Scroll",
+    "Carpentry Skill Mastery Scroll",
+    "Cartography Skill Mastery Scroll",
+    "Cooking Skill Mastery Scroll",
+    "discordance skill mastery scroll",
+    "fishing skill mastery scroll",
+    "Forensic Eval Skill Mastery Scroll",
+    "Herding Skill Mastery Scroll",
+    "Inscription Skill Mastery Scroll",
+    "Item ID Skill Mastery Scroll",
+    "Lockpicking Skill Mastery Scroll",
+    "Lumberjacking Skill Mastery Scroll",
+    "Mining Skill Mastery Scroll",
+    "Musicianship Skill Mastery Scroll",
+    "Peacemaking Skill Mastery Scroll",
+    "Poisoning Skill Mastery Scroll",
+    "Provocation Skill Mastery Scroll",
+    "Remove Trap Skill Mastery Scroll",
+    "Spirit Speak Skill Mastery Scroll",
+    "Stealth Skill Mastery Scroll",
+    "Tailoring Skill Mastery Scroll",
+    "Taste Id Skill Mastery Scroll",
+    "Tinkering Skill Mastery Scroll",
+    "Tracking Skill Mastery Scroll",
+    "Veterinary Skill Mastery Scroll",
+    "Plainly Drawn Fishing Map",
+    "Expertly Drawn Fishing Map",
+    "Adeptly Drawn Fishing Map",
+    "Cleverly Drawn Fishing Map",
+    "Deviously Drawn Fishing Map",
+    "Ingeniously Drawn Fishing Map",
+    "Diabolically Drawn Fishing Map",
+    "Legendarily Drawn Fishing Map",
+    "Plainly Drawn Treasure Map: Level 1",
+    "Expertly Drawn Treasure Map: Level 2",
+    "Adeptly Drawn Treasure Map: Level 3",
+    "Cleverly Drawn Treasure Map: Level 4",
+    "Deviously Drawn Treasure Map: Level 5",
+    "Ingeniously Drawn Treasure Map: Level 6",
+    "Diabolically Drawn Treasure Map: Level 7",
+    "Legendarily Drawn Treasure Map: Level 8",
+    "Dull Copper Ore Map",
+    "Shadow Ore Map",
+    "Copper Ore Map",
+    "Bronze Ore Map",
+    "Gold Ore Map",
+    "Agapite Ore Map",
+    "Verite Ore Map",
+    "Valorite Ore Map",
+    "Avarite Ore Map",
+    "Dullwood Lumber Map",
+    "Shadowwood Lumber Map",
+    "Copperwood Lumber Map",
+    "Bronzewood Lumber Map",
+    "Goldenwood Lumber Map",
+    "Rosewood Lumber Map",
+    "Verewood Lumber Map",
+    "Valewood Lumber Map",
+    "Avarwood Lumber Map",
+    "Dullhide Skinning Map",
+    "Shadowhide Skinning Map",
+    "Copperhide Skinning Map",
+    "Bronzehide Skinning Map",
+    "Goldenhide Skinning Map",
+    "Rosehide Skinning Map",
+    "Verehide Skinning Map",
+    "Valehide Skinning Map",
+    "Avarhide Skinning Map"
+];
 
 /**
  * if i < 1 then no # quantity displayed
@@ -79,6 +249,7 @@ Line 2 is for single items.
 This raw paste could contain several single items as well such as research notes, they don't stack
 thus will never have a " : #" format on them.
 
+You see: A Skill Mastery Orb : 2
 You see: Poison Aspect Core : 2
 You see: Void Aspect Core
 You see: Water Aspect Core
