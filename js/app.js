@@ -60,6 +60,10 @@ function parse(inputData){
     
     //what we are parsing against
     let parseRegex = /^You see: ([^:0-9]+) ?:? ?(\d+)?$/;
+
+    //The regex for the Rollem
+    //let parseRollemRegex = /@(.+), \d+ ⟵ [(\d+)]1d100/;
+    // First () Captures Name second () captures their roll. They need to show from high roll to lowest
     
     // make the initial array by spliting each line
     output = inputData.split('\n');
