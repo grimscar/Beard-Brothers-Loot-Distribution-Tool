@@ -59,7 +59,7 @@ function parse(inputData){
     let output = [];
     
     //what we are parsing against
-    let parseRegex = /^You see: ([^:0-9]+) ?:? ?(\d+)?$/;
+    let parseRegex = /^You see: ([^:0-9]+\b) ?:? ?(\d+)?$/;
 
     //The regex for the Rollem
     //let parseRollemRegex = /@(.+), \d+ ⟵ [(\d+)]1d100/;
