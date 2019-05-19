@@ -34,10 +34,12 @@ function makeTable(str){
     array.forEach(element => {
         newTable.appendChild(document.createElement("tr"));
         element.forEach(el => {
-            let cell = document.createElement("td");
-            let cellText = document.createTextNode(el);
-            cell.appendChild(cellText);
-            newTable.appendChild(cell);
+                if (el.value != '' || el.value != null){
+                let cell = document.createElement("td");
+                let cellText = document.createTextNode(el);
+                cell.appendChild(cellText);
+                newTable.appendChild(cell);
+            }
         })
     });
 
@@ -50,7 +52,7 @@ function parse(str){
     let out = [];
 
     //what we are parsing against
-    let p = " ";
+    let p = new RegExp(/^You see: (.+) : (\d+)$/);
     
     // make the initial array by spliting each line
     out = str.split('\n');
