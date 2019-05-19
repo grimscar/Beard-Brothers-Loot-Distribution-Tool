@@ -21,7 +21,8 @@ table, th, td {
 }
 
 .hide {
-    visibility: hidden;
+    left: -9999px;
+    position: absolute;
 }
 
 textarea {
