@@ -21,6 +21,14 @@ function toggleInputTableVisibility(){
     document.getElementById('d-input-journal').classList.add("hide");
 }
 
+function toggleInputTableVisibility(){
+    
+    //hide the input and button while showing the table
+    //document.getElementById('input-journal').classList.add("hide");
+    //document.getElementById('bJournal').classList.add("hide");
+    document.getElementById('d-output-rollem').classList.add("hide");
+}
+
 //takes input of a string and returns a table based on that
 function makeTable(inputData){
     let newTable = document.createElement("table");
@@ -61,10 +69,6 @@ function parse(inputData){
     //what we are parsing against
     let parseRegex = /^You see: ([^:0-9]+\b) ?:? ?(\d+)?$/;
 
-    //The regex for the Rollem
-    //let parseRollemRegex = /@(.+), \d+ ⟵ [(\d+)]1d100/;
-    // First () Captures Name second () captures their roll. They need to show from high roll to lowest
-    
     // make the initial array by spliting each line
     output = inputData.split('\n');
 
@@ -74,6 +78,26 @@ function parse(inputData){
         output[i] = tempString.split(parseRegex);
     }
     return output;
+}
+
+//takes in a string and returns a 2d array based on parsing out each line as a separate row
+function parse2(inputData2){
+    //what we are returning
+    let output2 = [];
+    
+    //The regex for the Rollem
+    // First () Captures Name second () captures their roll. They need to show from high roll to lowest
+    let parseRollemRegex = /@(.+), \d+ ⟵ [(\d+)]1d100/;
+
+    // make the initial array by spliting each line
+    output2 = inputData2.split('\n');
+
+    //go through the array and split each element into its own array based on p
+    for (let i = 0; i < output2.length; i++){
+        let tempString2 = output2[i];
+        output2[i] = tempString2.split(parseRollemRegex);
+    }
+    return output2;
 }
 
 //Checks each item in array to make sure its on the item list and it fixes quantities
