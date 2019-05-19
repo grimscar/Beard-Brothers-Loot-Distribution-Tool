@@ -32,15 +32,21 @@ function makeTable(str){
     //the next few lines set each word in the input as a separate td
     //it expects array to be a 2 dimensional array
     array.forEach(element => {
-        newTable.appendChild(document.createElement("tr"));
-        element.forEach(el => {
-                if (el.value != '' || el.value != null){
-                let cell = document.createElement("td");
-                let cellText = document.createTextNode(el);
-                cell.appendChild(cellText);
-                newTable.appendChild(cell);
-            }
-        })
+
+        //check that its on the table before adding the line
+        //if (isOnLootTable(element))
+        {
+        
+            newTable.appendChild(document.createElement("tr"));
+            element.forEach(el => {
+                    let cell = document.createElement("td");
+                    let cellText = document.createTextNode(el);
+                    cell.appendChild(cellText);
+                    if (cell.textContent.length > 0){
+                        newTable.appendChild(cell);
+                    }
+            })
+        }
     });
 
     return newTable;
@@ -50,9 +56,9 @@ function makeTable(str){
 function parse(str){
     //what we are returning
     let out = [];
-
+    
     //what we are parsing against
-    let p = new RegExp(/^You see: (.+) : (\d+)$/);
+    let p = /^You see: ([^:0-9]+) ?:? ?(\d+)?$/;
     
     // make the initial array by spliting each line
     out = str.split('\n');
@@ -63,6 +69,15 @@ function parse(str){
         out[i] = tempString.split(p);
     }
     return out;
+}
+
+//returns true if the string is on the loot table
+function isOnLootTable(array){
+    array.forEach(element => {
+        //check 
+        return true;
+    });
+    return false;
 }
 
 //Adds the finished table to the page
