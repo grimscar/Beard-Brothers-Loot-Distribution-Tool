@@ -12,6 +12,18 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     
 });
 
+document2.querySelector('#bJournal').addEventListener('click', function(event){
+    //get the text from the input field
+    let inputData2 = document2.querySelector("#input-journal").value;
+    
+    //This function returns the table want to show
+    let childAppend2 = makeTable(inputData2);
+    
+    addTable(childAppend2);
+    toggleInputTableVisibility();
+    
+});
+
 //change the table to show instead of the input field
 function toggleInputTableVisibility(){
     
@@ -59,6 +71,37 @@ function makeTable(inputData){
     });
 
     return newTable;
+}
+
+function makeTable(inputData2){
+    let newTable2 = document2.createElement("table");
+    // https://stackoverflow.com/questions/14643617/create-table-using-javascript
+    
+    //gets the array we are going to translate into the table
+    let array2 = parse(inputData2);
+
+    array2 = isOnLootTable(array2);
+
+    //the next few lines set each word in the input as a separate td
+    //it expects array to be a 2 dimensional array
+    array2.forEach(element2 => {
+
+        //check that its on the table before adding the line
+        {
+        
+            newTable2.appendChild(document2.createElement("tr"));
+            element2.forEach(el2 => {
+                    let cell2 = document2.createElement("td");
+                    let cellText2 = document2.createTextNode(el2);
+                    cell.appendChild(cellText2);
+                    if (cell2.textContent.length > 0){
+                        newTable2.appendChild(cell2);
+                    }
+            })
+        }
+    });
+
+    return newTable2;
 }
 
 //takes in a string and returns a 2d array based on parsing out each line as a separate row
