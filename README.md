@@ -102,6 +102,8 @@ ect.....
 
 In the example we had above Item1 - Item5 would all be "An Item" because those 5 are the highest value. Item 6 and Item 7 would be the "A cheaper item" then the last 13 items would be "The Cheapest Item"
 
+Though for items of value < 1001 those items will be randomly handed out (they don't follow the highest to lowest value rule) **This is just a feature to build into
+
 #For Regex
 
 
