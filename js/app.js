@@ -1,4 +1,7 @@
 
+// we will store the active loot arrays in here for later
+let activeLoot;
+
 // Event listener for the journal input button
 document.querySelector('#bJournal').addEventListener('click', function(event){
     //get the text from the input field
@@ -10,37 +13,83 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
 
     dataArray = isOnLootTable(dataArray);
 
+    //sort the array by value
+    dataArray = bubbleSortXDArray(dataArray, 4)
+
+    activeLoot = dataArray;
+
+    //giving non value items a blank value in the display
+    dataArray.forEach(element => {
+        if (element[4] < 1000) {
+            element[4] = "";
+        }
+    });
+
     //This function returns the table want to show
     let childAppend = makeTable(dataArray);
-    
+
     addTable(childAppend, document.getElementById('output-journal'));
-    toggleInputTableVisibility(document.getElementById('d-input-journal'));
+    document.getElementById('d-input-journal').classList.add("hide");
+
+    document.getElementById('d-input-rollem').classList.remove("hide");
     
 });
+
 // Event listener for the rollem button
+document.querySelector('#bRollem').addEventListener('click', function(event){
+
+    //get the text from the input field
+    let inputData = document.querySelector("#input-rollem").value;
+
+    let dataArray = prase(inputData, ", ");
+
+    //logic to randomly assign who gets what
+    //assign a random value to list
+    //after each memeber is given a random roll we start assigning loot
+    //we start with highest roller and highest value item
+    //then we go through the list backwards and reset
+
+    /**
+     * for loop to set 1 or 2
+     * if value is < 1000
+     *  instead add to new list
+     * for loop set 1
+     * high to low
+     * for loop set 2
+     * low to high
+     * 
+     * the sub 1000 list should be entirely randomly distributed
+     */
+
+    //for loop through th
+    
+});
+
+// Old event listener, kept for Archival purpose
+/*
 document.querySelector('#bRollem').addEventListener('click', function(event){
     //get the text from the input field
     let inputData = document.querySelector("#input-rollem").value;
     
     //let parseRegex = " "
-    let parseRegex = /^@(.+), '?(\w+)?'?,? ?\d+ ⟵ \[(\d+)\]\d+d\d+$/;
+    let parseRegex = /^@(.+), \d+ ⟵ \[(\d+)\]\d+d\d+$/;
     
     let dataArray = parse(inputData, parseRegex);
+
+    //Sort the array by highest roll
+    dataArray = bubbleSortXDArray(dataArray,1);
 
     //This function returns the table want to show
     let childAppend = makeTable(dataArray);
     
     addTable(childAppend, document.getElementById('output-rollem'));
-    toggleInputTableVisibility(document.getElementById('d-input-rollem'));
+    document.getElementById('d-input-rollem).classList.add("hide");
 });
+*/
 
 //change the table to show instead of the input field
 function toggleInputTableVisibility(elementToHide){
     
-    //hide the input and button while showing the table
-    //document.getElementById('input-journal').classList.add("hide");
-    //document.getElementById('bJournal').classList.add("hide");
-    //document.getElementById('d-input-journal').classList.add("hide");
     elementToHide.classList.add("hide");
 }
 
@@ -97,10 +146,13 @@ function isOnLootTable(array){
         
         //Loops through the item list looking for a match
         itemList.forEach(item =>  {
-            if (element[1] == item || element[1] == item + " ")
+            if (element[1] == item[0] || element[1] == item[0] + " ")
             {
                 //if we find a match we want to add it
                 toAdd = true;
+                element.push(item[1]);
+
+
                 
                 //any undfined at element[2] should be a 1 instead, they just dont have a quantity when read
                 if (element[2] == undefined){
@@ -115,7 +167,7 @@ function isOnLootTable(array){
                         toAdd = false;
                     }
                 });
-                if (toAdd){
+                if (toAdd){                    
                     output.push(element);
                 }
             }
@@ -132,128 +184,151 @@ function addTable(tbl, idToReplace)
     idToReplace.replaceWith(tbl);
 }
 
+//need to modify sort to sort a XD array based on index
+function bubbleSortXDArray(arr, index){
+    var len = arr.length;
+    for (var i = len-1; i>=0; i--){
+      for(var j = 1; j<=i; j++){
+        if(arr[j-1][index]<arr[j][index]){
+            var temp = arr[j-1];
+            arr[j-1] = arr[j];
+            arr[j] = temp;
+         }
+      }
+    }
+    return arr;
+ }
+
 
 // Item list definition
+//itemList[0] - name
+//itemList[1] - value
 
 var itemList = [
-    "A Skill Mastery Orb",
-    "Aegis Keep Cloth",
-    "Dark Forest Cloth",
-    "Mastercrafting Diagram",
-    "Metallic Umber Cloth",
-    "Mount Petram Cloth",
-    "Research Materials",
-    "Shimmer Evergreen Cloth",
-    "Air Aspect Core",
-    "Artisan Aspect Core",
-    "Command Aspect Core",
-    "Earth Aspect Core",
-    "Eldritch Aspect Core",
-    "Fire Aspect Core",
-    "Fortune Aspect Core",
-    "Lyric Aspect Core",
-    "Poison Aspect Core",
-    "Shadow Aspect Core",
-    "Void Aspect Core",
-    "Water Aspect Core",
-    "Air Aspect Extract",
-    "Artisan Aspect Extract",
-    "Command Aspect Extract",
-    "Earth Aspect Extract",
-    "Eldritch Aspect Extract",
-    "Fire Aspect Extract",
-    "Fortune Aspect Extract",
-    "Lyric Aspect Extract",
-    "Poison Aspect Extract",
-    "Shadow Aspect Extract",
-    "Void Aspect Extract",
-    "Water Aspect Extract",
-    "Air Phylactery",
-    "Artisan Phylactery",
-    "Command Phylactery",
-    "Earth Phylactery",
-    "Eldritch Phylactery",
-    "Fire Phylactery",
-    "Fortune Phylactery",
-    "Lyric Phylactery",
-    "Poison Phylactery",
-    "Shadow Phylactery",
-    "Void Phylactery",
-    "Water Phylactery",
-    "Alchemy Skill Mastery Scroll",
-    "Animal Lore Skill Mastery Scroll",
-    "Animal Taming Skill Mastery Scroll",
-    "Arms Lore Skill Mastery Scroll",
-    "Begging Skill Mastery Scroll",
-    "Blacksmithy Skill Mastery Scroll",
-    "Camping Skill Mastery Scroll",
-    "Carpentry Skill Mastery Scroll",
-    "Cartography Skill Mastery Scroll",
-    "Cooking Skill Mastery Scroll",
-    "discordance skill mastery scroll",
-    "fishing skill mastery scroll",
-    "Forensic Eval Skill Mastery Scroll",
-    "Herding Skill Mastery Scroll",
-    "Inscription Skill Mastery Scroll",
-    "Item ID Skill Mastery Scroll",
-    "Lockpicking Skill Mastery Scroll",
-    "Lumberjacking Skill Mastery Scroll",
-    "Mining Skill Mastery Scroll",
-    "Musicianship Skill Mastery Scroll",
-    "Peacemaking Skill Mastery Scroll",
-    "Poisoning Skill Mastery Scroll",
-    "Provocation Skill Mastery Scroll",
-    "Remove Trap Skill Mastery Scroll",
-    "Spirit Speak Skill Mastery Scroll",
-    "Stealth Skill Mastery Scroll",
-    "Tailoring Skill Mastery Scroll",
-    "Taste Id Skill Mastery Scroll",
-    "Tinkering Skill Mastery Scroll",
-    "Tracking Skill Mastery Scroll",
-    "Veterinary Skill Mastery Scroll",
-    "Plainly Drawn Fishing Map",
-    "Expertly Drawn Fishing Map",
-    "Adeptly Drawn Fishing Map",
-    "Cleverly Drawn Fishing Map",
-    "Deviously Drawn Fishing Map",
-    "Ingeniously Drawn Fishing Map",
-    "Diabolically Drawn Fishing Map",
-    "Legendarily Drawn Fishing Map",
-    "Plainly Drawn Treasure Map: Level 1",
-    "Expertly Drawn Treasure Map: Level 2",
-    "Adeptly Drawn Treasure Map: Level 3",
-    "Cleverly Drawn Treasure Map: Level 4",
-    "Deviously Drawn Treasure Map: Level 5",
-    "Ingeniously Drawn Treasure Map: Level 6",
-    "Diabolically Drawn Treasure Map: Level 7",
-    "Legendarily Drawn Treasure Map: Level 8",
-    "Dull Copper Ore Map",
-    "Shadow Ore Map",
-    "Copper Ore Map",
-    "Bronze Ore Map",
-    "Gold Ore Map",
-    "Agapite Ore Map",
-    "Verite Ore Map",
-    "Valorite Ore Map",
-    "Avarite Ore Map",
-    "Dullwood Lumber Map",
-    "Shadowwood Lumber Map",
-    "Copperwood Lumber Map",
-    "Bronzewood Lumber Map",
-    "Goldenwood Lumber Map",
-    "Rosewood Lumber Map",
-    "Verewood Lumber Map",
-    "Valewood Lumber Map",
-    "Avarwood Lumber Map",
-    "Dullhide Skinning Map",
-    "Shadowhide Skinning Map",
-    "Copperhide Skinning Map",
-    "Bronzehide Skinning Map",
-    "Goldenhide Skinning Map",
-    "Rosehide Skinning Map",
-    "Verehide Skinning Map",
-    "Valehide Skinning Map",
-    "Avarhide Skinning Map"
+    ["A Skill Mastery Orb",45000],
+    ["Mastercrafting Diagram",60000],
+    ["Research Materials",45000],
+    ["Aegis Keep Cloth",12000],
+    ["Dark Crimson Cloth",15000],
+    ["Dark Forest Cloth",23000],
+    ["Dark Salmon Cloth",18000],
+    ["Darkmire Temple Cloth",12000],
+    ["Metallic Orange Cloth",20000],
+    ["Metallic Umber Cloth",20000],
+    ["Mount Petram Cloth",12000],
+    ["Powder Blush Cloth",45000],
+    ["Powder Orchid Cloth",45000],
+    ["Powder Peach Cloth",45000],
+    ["Air Aspect Extract",10000],
+    ["Artisan Aspect Extract",11000],
+    ["Command Aspect Extract",58000],
+    ["Earth Aspect Extract",13000],
+    ["Eldritch Aspect Extract",45000],
+    ["Fire Aspect Extract",15000],
+    ["Fortune Aspect Extract",42000],
+    ["Lyric Aspect Extract",45000],
+    ["Poison Aspect Extract",10000],
+    ["Shadow Aspect Extract",15000],
+    ["Void Aspect Extract",13000],
+    ["Water Aspect Extract",10000],
+    ["Air Aspect Core",3000],
+    ["Artisan Aspect Core",5000],
+    ["Command Aspect Core",70000],
+    ["Earth Aspect Core",5000],
+    ["Eldritch Aspect Core",25000],
+    ["Fire Aspect Core",10000],
+    ["Fortune Aspect Core",24000],
+    ["Lyric Aspect Core",32000],
+    ["Poison Aspect Core",3000],
+    ["Shadow Aspect Core",10000],
+    ["Void Aspect Core",5000],
+    ["Water Aspect Core",5000],
+    ["Air Phylactery",3000],
+    ["Artisan Phylactery",5000],
+    ["Command Phylactery",15000],
+    ["Earth Phylactery",3000],
+    ["Eldritch Phylactery",9000],
+    ["Fire Phylactery",5000],
+    ["Fortune Phylactery",9000],
+    ["Lyric Phylactery",9000],
+    ["Poison Phylactery",3000],
+    ["Shadow Phylactery",5000],
+    ["Void Phylactery",3000],
+    ["Water Phylactery",3000],
+    ["Alchemy Skill Mastery Scroll",16],
+    ["Animal Lore Skill Mastery Scroll",60000],
+    ["Animal Taming Skill Mastery Scroll",65000],
+    ["Arms Lore Skill Mastery Scroll",17],
+    ["Begging Skill Mastery Scroll",18],
+    ["Blacksmithy Skill Mastery Scroll",19],
+    ["Camping Skill Mastery Scroll",20],
+    ["Carpentry Skill Mastery Scroll",21],
+    ["Cartography Skill Mastery Scroll",22],
+    ["Cooking Skill Mastery Scroll",23],
+    ["discordance skill mastery scroll",24],
+    ["fishing skill mastery scroll",25],
+    ["Forensic Eval Skill Mastery Scroll",26],
+    ["Herding Skill Mastery Scroll",27],
+    ["Inscription Skill Mastery Scroll",13000],
+    ["Item ID Skill Mastery Scroll",28],
+    ["Lockpicking Skill Mastery Scroll",15000],
+    ["Lumberjacking Skill Mastery Scroll",29],
+    ["Mining Skill Mastery Scroll",30],
+    ["Musicianship Skill Mastery Scroll",35000],
+    ["Peacemaking Skill Mastery Scroll",25000],
+    ["Poisoning Skill Mastery Scroll",31],
+    ["Provocation Skill Mastery Scroll",32],
+    ["Remove Trap Skill Mastery Scroll",15000],
+    ["Spirit Speak Skill Mastery Scroll",20000],
+    ["Stealth Skill Mastery Scroll",15000],
+    ["Tailoring Skill Mastery Scroll",33],
+    ["Taste Id Skill Mastery Scroll",34],
+    ["Tinkering Skill Mastery Scroll",35],
+    ["Tracking Skill Mastery Scroll",36],
+    ["Veterinary Skill Mastery Scroll",37],
+    ["Plainly Drawn Fishing Map",1],
+    ["Expertly Drawn Fishing Map",2],
+    ["Adeptly Drawn Fishing Map",3],
+    ["Cleverly Drawn Fishing Map",4],
+    ["Deviously Drawn Fishing Map",5],
+    ["Ingeniously Drawn Fishing Map",6],
+    ["Diabolically Drawn Fishing Map",7],
+    ["Legendarily Drawn Fishing Map",8],
+    ["Plainly Drawn Treasure Map: Level 1",6000],
+    ["Expertly Drawn Treasure Map: Level 2",12000],
+    ["Adeptly Drawn Treasure Map: Level 3",18000],
+    ["Cleverly Drawn Treasure Map: Level 4",24000],
+    ["Deviously Drawn Treasure Map: Level 5",30000],
+    ["Ingeniously Drawn Treasure Map: Level 6",36000],
+    ["Diabolically Drawn Treasure Map: Level 7",42000],
+    ["Legendarily Drawn Treasure Map: Level 8",48000],
+    ["Dull Copper Ore Map",1],
+    ["Shadow Ore Map",1],
+    ["Copper Ore Map",1],
+    ["Bronze Ore Map",1],
+    ["Gold Ore Map",1],
+    ["Agapite Ore Map",1],
+    ["Verite Ore Map",1],
+    ["Valorite Ore Map",1],
+    ["Avarite Ore Map",1],
+    ["Dullwood Lumber Map",9],
+    ["Shadowwood Lumber Map",10],
+    ["Copperwood Lumber Map",11],
+    ["Bronzewood Lumber Map",12],
+    ["Goldenwood Lumber Map",3000],
+    ["Rosewood Lumber Map",6000],
+    ["Verewood Lumber Map",9000],
+    ["Valewood Lumber Map",12000],
+    ["Avarwood Lumber Map",15000],
+    ["Dullhide Skinning Map",12],
+    ["Shadowhide Skinning Map",13],
+    ["Copperhide Skinning Map",14],
+    ["Bronzehide Skinning Map",15],
+    ["Goldenhide Skinning Map",3000],
+    ["Rosehide Skinning Map",6000],
+    ["Verehide Skinning Map",9000],
+    ["Valehide Skinning Map",12000],
+    ["Avarhide Skinning Map",15000]
 ];
 
 /**
@@ -296,6 +371,8 @@ You see: discordance skill mastery scroll
 You see: fishing skill mastery scroll
 You see: carpentry skill mastery scroll
 You see: remove trap skill mastery scroll : 2
+You see: Copper Ore Map
+You see: Adeptly Drawn Fishing Map
 
 
 Rollem sample log:
