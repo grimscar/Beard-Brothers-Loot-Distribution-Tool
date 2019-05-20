@@ -81,19 +81,19 @@ Name1, Name2, Name3, Name4.
 
 They will get a random number assigned to them and rank highest to lowest example:
 
-Name3, 88
-Name2, 84
-Name4, 15
-Name1, 1
+| Name3, 88 |
+| Name2, 84 |
+| Name4, 15 |
+| Name1, 1 |
 
 Then loot is going to be handed out giving out all the highest valued items first.
 Loot is given round-robin fashion till all of the loot is gone.
 
-Item 1 > Name3
-Item 2 > Name2
-Item 3 > Name4
-Item 4 > Name1
-Item 5 > Name1
+| Item 1 > Name3 |
+| Item 2 > Name2 |
+| Item 3 > Name4 |
+| Item 4 > Name1 |
+| Item 5 > Name1 |
 Item 6 > Name4
 Item 7 > Name2
 Item 8 > Name3
@@ -104,7 +104,7 @@ In the example we had above Item1 - Item5 would all be "An Item" because those 5
 
 Though for items of value < 1001 those items will be randomly handed out (they don't follow the highest to lowest value rule) **This is just a feature to build into
 
-#For Regex
+# For Regex
 
 
 Login confirm on UO Outlands
