@@ -81,6 +81,8 @@ Name1, Name2, Name3, Name4.
 
 They will get a random number assigned to them and rank highest to lowest example:
 
+|Dice Example|
+|---|
 | Name3, 88 |
 | Name2, 84 |
 | Name4, 15 |
@@ -89,6 +91,8 @@ They will get a random number assigned to them and rank highest to lowest exampl
 Then loot is going to be handed out giving out all the highest valued items first.
 Loot is given round-robin fashion till all of the loot is gone.
 
+| Order Example|
+|---|
 | Item 1 > Name3 |
 | Item 2 > Name2 |
 | Item 3 > Name4 |
