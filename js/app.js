@@ -82,16 +82,32 @@ function isOnLootTable(array){
 
    array.forEach(element => {
         //check to see if the item is on the list
-
-        //had issue with regex capturing extra whitespace
-        //put this in to clear up any errant whitespace
-            itemList.forEach(item =>  {
-                if (element[1] == item || element[1] == item + " ")
-                {
-                    if (element[2] == undefined)
-                        element[2] = 1;
+        let toAdd = false;
+        
+        //Loops through the item list looking for a match
+        itemList.forEach(item =>  {
+            if (element[1] == item || element[1] == item + " ")
+            {
+                //if we find a match we want to add it
+                toAdd = true;
+                
+                //any undfined at element[2] should be a 1 instead, they just dont have a quantity when read
+                if (element[2] == undefined){
+                    element[2] = 1;
+                }
+                
+                //if the item is already on the output list, we just want to add the quantity
+                output.forEach(line => {
+                    if (line[1] == element[1])
+                    {
+                        line[2] = parseInt(line[2]) + parseInt(element[2]);
+                        toAdd = false;
+                    }
+                });
+                if (toAdd){
                     output.push(element);
                 }
+            }
         });
    });
    return output;
