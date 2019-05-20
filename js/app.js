@@ -6,20 +6,29 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     
     let parseRegex = /^You see: ([^:0-9]+\b) ?:? ?(\d+)?$/;
     //This function returns the table want to show
-    let childAppend = makeTable(inputData, parseRegex);
+    let dataArray = parse(inputData, parseRegex);
+
+    dataArray = isOnLootTable(dataArray);
+
+    //This function returns the table want to show
+    let childAppend = makeTable(dataArray);
     
     addTable(childAppend, document.getElementById('output-journal'));
     toggleInputTableVisibility(document.getElementById('d-input-journal'));
     
 });
-
+// Event listener for the rollem button
 document.querySelector('#bRollem').addEventListener('click', function(event){
     //get the text from the input field
     let inputData = document.querySelector("#input-rollem").value;
     
-    let parseRegex = /@(.+), \d+ ⟵ [(\d+)]1d100/;
+    //let parseRegex = " "
+    let parseRegex = /^@(.+), '?(\w+)?'?,? ?\d+ ⟵ \[(\d+)\]\d+d\d+$/;
+    
+    let dataArray = parse(inputData, parseRegex);
+
     //This function returns the table want to show
-    let childAppend = makeTable(inputData, parseRegex);
+    let childAppend = makeTable(dataArray);
     
     addTable(childAppend, document.getElementById('output-rollem'));
     toggleInputTableVisibility(document.getElementById('d-input-rollem'));
@@ -35,19 +44,13 @@ function toggleInputTableVisibility(elementToHide){
     elementToHide.classList.add("hide");
 }
 
-//takes input of a string and returns a table based on that
-function makeTable(inputData, parseRegex){
+//takes input of a 2d array to make the table from
+function makeTable(dataArray){
     let newTable = document.createElement("table");
-    // https://stackoverflow.com/questions/14643617/create-table-using-javascript
-    
-    //gets the array we are going to translate into the table
-    let array = parse(inputData, parseRegex);
-
-    array = isOnLootTable(array);
 
     //the next few lines set each word in the input as a separate td
     //it expects array to be a 2 dimensional array
-    array.forEach(element => {
+    dataArray.forEach(element => {
         {
             newTable.appendChild(document.createElement("tr"));
             element.forEach(el => {
@@ -122,6 +125,8 @@ function isOnLootTable(array){
 }
 
 //Adds the finished table to the page
+//tbl: The new table element to use
+//idToReplace: the existing element where the table should be located
 function addTable(tbl, idToReplace)
 {
     idToReplace.replaceWith(tbl);
