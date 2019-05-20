@@ -4,40 +4,51 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     //get the text from the input field
     let inputData = document.querySelector("#input-journal").value;
     
+    let parseRegex = /^You see: ([^:0-9]+\b) ?:? ?(\d+)?$/;
     //This function returns the table want to show
-    let childAppend = makeTable(inputData);
+    let childAppend = makeTable(inputData, parseRegex);
     
-    addTable(childAppend);
-    toggleInputTableVisibility();
+    addTable(childAppend, document.getElementById('output-journal'));
+    toggleInputTableVisibility(document.getElementById('d-input-journal'));
     
 });
 
+document.querySelector('#bRollem').addEventListener('click', function(event){
+    //get the text from the input field
+    let inputData = document.querySelector("#input-rollem").value;
+    
+    let parseRegex = /@(.+), \d+ ⟵ [(\d+)]1d100/;
+    //This function returns the table want to show
+    let childAppend = makeTable(inputData, parseRegex);
+    
+    addTable(childAppend, document.getElementById('output-rollem'));
+    toggleInputTableVisibility(document.getElementById('d-input-rollem'));
+});
+
 //change the table to show instead of the input field
-function toggleInputTableVisibility(){
+function toggleInputTableVisibility(elementToHide){
     
     //hide the input and button while showing the table
     //document.getElementById('input-journal').classList.add("hide");
     //document.getElementById('bJournal').classList.add("hide");
-    document.getElementById('d-input-journal').classList.add("hide");
+    //document.getElementById('d-input-journal').classList.add("hide");
+    elementToHide.classList.add("hide");
 }
 
 //takes input of a string and returns a table based on that
-function makeTable(inputData){
+function makeTable(inputData, parseRegex){
     let newTable = document.createElement("table");
     // https://stackoverflow.com/questions/14643617/create-table-using-javascript
     
     //gets the array we are going to translate into the table
-    let array = parse(inputData);
+    let array = parse(inputData, parseRegex);
 
     array = isOnLootTable(array);
 
     //the next few lines set each word in the input as a separate td
     //it expects array to be a 2 dimensional array
     array.forEach(element => {
-
-        //check that its on the table before adding the line
         {
-        
             newTable.appendChild(document.createElement("tr"));
             element.forEach(el => {
                     let cell = document.createElement("td");
@@ -53,13 +64,10 @@ function makeTable(inputData){
     return newTable;
 }
 
-//takes in a string and returns a 2d array based on parsing out each line as a separate row
-function parse(inputData){
+//takes in a string as inputData and returns a 2d array based on the parseRegex out each line as a separate row
+function parse(inputData, parseRegex){
     //what we are returning
     let output = [];
-    
-    //what we are parsing against
-    let parseRegex = /^You see: ([^:0-9]+\b) ?:? ?(\d+)?$/;
 
     //The regex for the Rollem
     //let parseRollemRegex = /@(.+), \d+ ⟵ [(\d+)]1d100/;
@@ -114,9 +122,9 @@ function isOnLootTable(array){
 }
 
 //Adds the finished table to the page
-function addTable(tbl)
+function addTable(tbl, idToReplace)
 {
-    document.getElementById('output-journal').replaceWith(tbl);
+    idToReplace.replaceWith(tbl);
 }
 
 
@@ -283,4 +291,28 @@ You see: discordance skill mastery scroll
 You see: fishing skill mastery scroll
 You see: carpentry skill mastery scroll
 You see: remove trap skill mastery scroll : 2
+
+
+Rollem sample log:
+
+@thespoons (Kimchi), 84 ⟵ [84]1d100
+@Qvothe/I BANKSIT IRL), 66 ⟵ [66]1d100
+@Orlik, 84 ⟵ [84]1d100
+@Despot (Silkyslim), 1 ⟵ [1]1d100
+@imp, 40 ⟵ [40]1d100
+@[BB] Kuma, 55 ⟵ [55]1d100
+@Lite, 91 ⟵ [91]1d100
+@HappyX, 81 ⟵ [81]1d100
+@Bashful/Sicario, 39 ⟵ [39]1d100
+@Rem (Aerys/Vp), 29 ⟵ [29]1d100
+@Weebus, 43 ⟵ [43]1d100
+@rjay / Sarious, 82 ⟵ [82]1d100
+@El General (Unforgiven), 1 ⟵ [1]1d100
+@KoolWip, 74 ⟵ [74]1d100
+@GROUCH IS BACK, 86 ⟵ [86]1d100
+@ShadowStone, 'Agrias', 88 ⟵ [88]1d100
+@ShadowStone, 13 ⟵ [13]1d100
+@Ardaric (Jack Churchill), 'clubber', 66 ⟵ [66]1d100
+@Ardaric (Jack Churchill), 'decimus', 9 ⟵ [9]1d100
+
 */
