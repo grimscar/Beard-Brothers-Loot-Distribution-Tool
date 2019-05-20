@@ -65,6 +65,42 @@ https://www.youtube.com/watch?v=iiADhChRriM
 This area here contains all of our items in arrays of Type:Item
 */
 
+#Loot Handling
+
+Loot will be ordered highest value to lowest value and it will show up idealing in this order:
+
+Value | Item Name | Quantity
+
+An item | 25000 | 5
+A cheaper item | 2500 | 2
+the cheapest item | 1000 | 13
+
+People will be entered manually witht this format:
+
+Name1, Name2, Name3, Name4.
+
+They will get a random number assigned to them and rank highest to lowest example:
+
+Name3, 88
+Name2, 84
+Name4, 15
+Name1, 1
+
+Then loot is going to be handed out giving out all the highest valued items first.
+Loot is given round-robin fashion till all of the loot is gone.
+
+Item 1 > Name3
+Item 2 > Name2
+Item 3 > Name4
+Item 4 > Name1
+Item 5 > Name1
+Item 6 > Name4
+Item 7 > Name2
+Item 8 > Name3
+Item 9 > Name3
+ect.....
+
+In the example we had above Item1 - Item5 would all be "An Item" because those 5 are the highest value. Item 6 and Item 7 would be the "A cheaper item" then the last 13 items would be "The Cheapest Item"
 
 #For Regex
 
