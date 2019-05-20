@@ -69,13 +69,13 @@ This area here contains all of our items in arrays of Type:Item
 
 Loot will be ordered highest value to lowest value and it will show up idealing in this order:
 
-Value | Item Name | Quantity
+| Value | Item Name | Quantity |
+|---|---|---|
+| An item | 25000 | 5 |
+| A cheaper item | 2500 | 2 |
+| the cheapest item | 1000 | 13 |
 
-An item | 25000 | 5
-A cheaper item | 2500 | 2
-the cheapest item | 1000 | 13
-
-People will be entered manually witht this format:
+People will be entered manually with this format:
 
 Name1, Name2, Name3, Name4.
 
