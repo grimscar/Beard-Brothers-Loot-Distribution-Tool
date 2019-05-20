@@ -65,7 +65,7 @@ https://www.youtube.com/watch?v=iiADhChRriM
 This area here contains all of our items in arrays of Type:Item
 */
 
-#Loot Handling
+# Loot Handling
 
 Loot will be ordered highest value to lowest value and it will show up idealing in this order:
 
