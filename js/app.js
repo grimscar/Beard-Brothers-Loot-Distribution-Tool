@@ -28,9 +28,11 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     //This function returns the table want to show
     let childAppend = makeTable(dataArray);
 
+    //add the table to the page
     addTable(childAppend, document.getElementById('output-journal'));
+    //hide the journal input field
     document.getElementById('d-input-journal').classList.add("hide");
-
+    //show the player list input field
     document.getElementById('d-input-rollem').classList.remove("hide");
     
 });
@@ -41,7 +43,18 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
     //get the text from the input field
     let inputData = document.querySelector("#input-rollem").value;
 
-    let dataArray = prase(inputData, ", ");
+    //Players
+    let dataArray = parse(inputData, ", ");
+    let playerArray = [];
+
+    //Roll a random number for players between 1-100
+    dataArray.forEach(element => {
+        let roll = Math.random() * 100;
+        playerArray.push([element, roll])
+    });
+
+    //Sort them by their roll
+    playerArray = bubbleSortXDArray(playerArray, 1);
 
     //logic to randomly assign who gets what
     //assign a random value to list
@@ -61,7 +74,86 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
      * the sub 1000 list should be entirely randomly distributed
      */
 
-    //for loop through th
+     //number of items to distribute
+    let itemsLeft = activeLoot.length;
+    //loop selector
+    let loopA = true;
+    let itemIndex = 0;
+    debugger;
+
+
+
+//testing without low values
+    while (itemsLeft > 0){
+        for (let i = 0; i < playerArray.length, i++;){
+            //each player gets one piece of loot in order of their rolls
+            playerArray[i].push(activeLoot[itemIndex]);
+            itemIndex = parseInt(itemIndex) +1;
+            itemsLeft = parseInt(itemsLeft) -1;         
+        }
+    }
+
+
+/* 
+    low value equation
+
+
+    while (itemsLeft > 0){
+        //check if its a high value item
+        if (parseInt(activeLoot[itemIndex][4]) >= 1000){
+            if (loopA){
+                debugger;
+                for (let i = 0; i < playerArray.length, i++;){
+                    debugger;
+                    if (!(parseInt(activeLoot[itemIndex][4]) >= 1000) && itemsLeft > 0)
+                    {break;}
+                    //each player gets one piece of loot in order of their rolls
+                    debugger;
+                    playerArray[i].push(activeLoot[itemIndex]);
+                    itemIndex = parseInt(itemIndex) +1;
+                    itemsLeft = parseInt(itemsLeft) -1;
+                    console.log(itemIndex + " " + itemsLeft);
+                    debugger;         
+                }
+                loopA = false;
+                debugger;
+            }
+            else {
+                for (let x = playerArray.length-1; x >= 0, x--;){
+                    debugger;
+                    let currentItemValue = parseInt(activeLoot[itemIndex][4]); 
+                    if (!(currentItemValue >= 1000) && itemsLeft > 0)
+                    {break;}
+                    //each player gets one piece of loot in order of their rolls
+                    debugger;
+                    playerArray[x].push(activeLoot[itemIndex]);
+                    itemIndex = parseInt(itemIndex) +1;
+                    itemsLeft = parseInt(itemsLeft) -1;
+                    console.log(itemIndex + " " + itemsLeft);
+                    debugger;
+                }
+                loopA = true;
+            }
+            debugger;
+        }
+        //distribute low value items
+        else{
+            let rand = Math.floor(Math.random()*playerArray.length);
+            playerArray[rand].push(activeLoot[itemIndex]);
+            itemIndex = parseInt(itemIndex) +1;
+            itemsLeft = parseInt(itemsLeft) -1;
+            console.log(itemIndex + " " + itemsLeft);
+            debugger;
+        }
+    }
+    debugger;
+
+*/
+
+    let childAppend = makeTable(playerArray);
+    addTable(childAppend, document.getElementById('output-rollem'));
+    debugger;
+    document.getElementById('d-input-rollem').classList.add("hide");
     
 });
 
@@ -331,14 +423,6 @@ var itemList = [
     ["Avarhide Skinning Map",15000]
 ];
 
-/**
- * if i < 1 then no # quantity displayed
- * 
- * import -> if no # then quantity +1
- * else quantity + #
- * 
- */
-
 
 /* Item list that needs REGEX setup to pull from.
 
@@ -373,28 +457,5 @@ You see: carpentry skill mastery scroll
 You see: remove trap skill mastery scroll : 2
 You see: Copper Ore Map
 You see: Adeptly Drawn Fishing Map
-
-
-Rollem sample log:
-
-@thespoons (Kimchi), 84 ⟵ [84]1d100
-@Qvothe/I BANKSIT IRL), 66 ⟵ [66]1d100
-@Orlik, 84 ⟵ [84]1d100
-@Despot (Silkyslim), 1 ⟵ [1]1d100
-@imp, 40 ⟵ [40]1d100
-@[BB] Kuma, 55 ⟵ [55]1d100
-@Lite, 91 ⟵ [91]1d100
-@HappyX, 81 ⟵ [81]1d100
-@Bashful/Sicario, 39 ⟵ [39]1d100
-@Rem (Aerys/Vp), 29 ⟵ [29]1d100
-@Weebus, 43 ⟵ [43]1d100
-@rjay / Sarious, 82 ⟵ [82]1d100
-@El General (Unforgiven), 1 ⟵ [1]1d100
-@KoolWip, 74 ⟵ [74]1d100
-@GROUCH IS BACK, 86 ⟵ [86]1d100
-@ShadowStone, 'Agrias', 88 ⟵ [88]1d100
-@ShadowStone, 13 ⟵ [13]1d100
-@Ardaric (Jack Churchill), 'clubber', 66 ⟵ [66]1d100
-@Ardaric (Jack Churchill), 'decimus', 9 ⟵ [9]1d100
 
 */
