@@ -163,7 +163,7 @@ function parse(inputData, parseRegex){
         if (output[1].includes("Treasure") || output[1].includes("treasure"))
         {
             let tempString = output[i];
-            output[i] = tempString.split(/^You see: (\w+) drawn treasure map: level (\d+)$/);
+            output[i] = tempString.split(/^You see: (\w+ drawn treasure map: level \d+)$/);
         }
         else {
             let tempString = output[i];
