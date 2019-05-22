@@ -47,6 +47,8 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
     let dataArray = parse(inputData, ", ");
     let playerArray = [];
 
+    //logic to randomly assign who gets what
+
     //Roll a random number for players between 1-100
     dataArray[0].forEach(element => {
         let roll = Math.floor(Math.random() * 100);
@@ -56,23 +58,9 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
     //Sort them by their roll
     playerArray = bubbleSortXDArray(playerArray, 1);
 
-    //logic to randomly assign who gets what
-    //assign a random value to list
-    //after each memeber is given a random roll we start assigning loot
     //we start with highest roller and highest value item
+    //we go down the list
     //then we go through the list backwards and reset
-
-    /**
-     * for loop to set 1 or 2
-     * if value is < 1000
-     *  instead add to new list
-     * for loop set 1
-     * high to low
-     * for loop set 2
-     * low to high
-     * 
-     * the sub 1000 list should be entirely randomly distributed
-     */
 
      //number of items to distribute
     let itemsLeft = activeLoot.length;
@@ -87,8 +75,16 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
 
                 //each player gets one piece of loot in order of their rolls
                 playerArray[i].push(activeLoot[itemIndex][1]);
-                itemIndex = parseInt(itemIndex) +1;
-                itemsLeft = parseInt(itemsLeft) -1;
+                
+                //Logic to deal with item quantities
+                //subtract 1 from item quantity
+                activeLoot[itemIndex][2]--;
+
+                //if nothing left then increment array
+                if (activeLoot[itemIndex][2] < 1){
+                    itemIndex = parseInt(itemIndex) +1;
+                    itemsLeft = parseInt(itemsLeft) -1;
+                }
             }
             loopA = false;
         }
@@ -98,8 +94,16 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
 
                 //each player gets one piece of loot in order of their rolls
                 playerArray[x].push(activeLoot[itemIndex][1]);
-                itemIndex = parseInt(itemIndex) +1;
-                itemsLeft = parseInt(itemsLeft) -1;
+
+                //Logic to deal with item quantities
+                //subtract 1 from item quantity
+                activeLoot[itemIndex][2]--;
+
+                //if nothing left then increment array
+                if (activeLoot[itemIndex][2] < 1){
+                    itemIndex = parseInt(itemIndex) +1;
+                    itemsLeft = parseInt(itemsLeft) -1;
+                }
             }
             loopA = true;
         }
