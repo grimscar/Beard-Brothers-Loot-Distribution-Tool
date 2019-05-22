@@ -8,6 +8,7 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     let inputData = document.querySelector("#input-journal").value;
     
     let parseRegex = /^You see: (.+) ?:? ?(\d+)?$/;
+  
     //This function returns the table want to show
     let dataArray = parse(inputData, parseRegex);
 
@@ -246,7 +247,7 @@ function bubbleSortXDArray(arr, index){
 
 var itemList = [
     ["A Skill Mastery Orb",45000],
-    ["Mastercrafting Diagram",60000],
+    ["mastercrafting diagram",60000],
     ["Research Materials",45000],
     ["Aegis Keep Cloth",12000],
     ["Dark Crimson Cloth",15000],
