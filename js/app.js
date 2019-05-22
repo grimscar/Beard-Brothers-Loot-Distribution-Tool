@@ -48,8 +48,8 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
     let playerArray = [];
 
     //Roll a random number for players between 1-100
-    dataArray.forEach(element => {
-        let roll = Math.random() * 100;
+    dataArray[0].forEach(element => {
+        let roll = Math.floor(Math.random() * 100);
         playerArray.push([element, roll])
     });
 
@@ -81,35 +81,18 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
     let itemIndex = 0;
     debugger;
 
-
-
-//testing without low values
-    while (itemsLeft > 0){
-        for (let i = 0; i < playerArray.length, i++;){
-            //each player gets one piece of loot in order of their rolls
-            playerArray[i].push(activeLoot[itemIndex]);
-            itemIndex = parseInt(itemIndex) +1;
-            itemsLeft = parseInt(itemsLeft) -1;         
-        }
-    }
-
-
-/* 
-    low value equation
-
-
     while (itemsLeft > 0){
         //check if its a high value item
         if (parseInt(activeLoot[itemIndex][4]) >= 1000){
             if (loopA){
                 debugger;
-                for (let i = 0; i < playerArray.length, i++;){
+                for (let i = 0; i < playerArray.length; i++){
                     debugger;
                     if (!(parseInt(activeLoot[itemIndex][4]) >= 1000) && itemsLeft > 0)
                     {break;}
                     //each player gets one piece of loot in order of their rolls
                     debugger;
-                    playerArray[i].push(activeLoot[itemIndex]);
+                    playerArray[i].push(activeLoot[itemIndex][1]);
                     itemIndex = parseInt(itemIndex) +1;
                     itemsLeft = parseInt(itemsLeft) -1;
                     console.log(itemIndex + " " + itemsLeft);
@@ -119,14 +102,14 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
                 debugger;
             }
             else {
-                for (let x = playerArray.length-1; x >= 0, x--;){
+                for (let x = playerArray.length-1; x >= 0; x--){
                     debugger;
                     let currentItemValue = parseInt(activeLoot[itemIndex][4]); 
                     if (!(currentItemValue >= 1000) && itemsLeft > 0)
                     {break;}
                     //each player gets one piece of loot in order of their rolls
                     debugger;
-                    playerArray[x].push(activeLoot[itemIndex]);
+                    playerArray[x].push(activeLoot[itemIndex][1]);
                     itemIndex = parseInt(itemIndex) +1;
                     itemsLeft = parseInt(itemsLeft) -1;
                     console.log(itemIndex + " " + itemsLeft);
@@ -139,7 +122,7 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
         //distribute low value items
         else{
             let rand = Math.floor(Math.random()*playerArray.length);
-            playerArray[rand].push(activeLoot[itemIndex]);
+            playerArray[rand].push(activeLoot[itemIndex][1]);
             itemIndex = parseInt(itemIndex) +1;
             itemsLeft = parseInt(itemsLeft) -1;
             console.log(itemIndex + " " + itemsLeft);
@@ -148,7 +131,6 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
     }
     debugger;
 
-*/
 
     let childAppend = makeTable(playerArray);
     addTable(childAppend, document.getElementById('output-rollem'));
@@ -457,5 +439,7 @@ You see: carpentry skill mastery scroll
 You see: remove trap skill mastery scroll : 2
 You see: Copper Ore Map
 You see: Adeptly Drawn Fishing Map
+
+Jim, Bob, Sue, Lemy, Jake, Fox
 
 */
