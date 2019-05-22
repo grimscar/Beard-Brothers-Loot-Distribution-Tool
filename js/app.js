@@ -7,7 +7,7 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     //get the text from the input field
     let inputData = document.querySelector("#input-journal").value;
     
-    let parseRegex = /^You see: ([^:0-9]+\b) ?:? ?(\d+)?$/;
+    let parseRegex = /^You see: ([^0-9]+\b) ?:? ?(\d+)?$/;
     //This function returns the table want to show
     let dataArray = parse(inputData, parseRegex);
 
