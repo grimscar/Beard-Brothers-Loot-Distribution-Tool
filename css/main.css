@@ -1,23 +1,44 @@
 body {
-    background-color: slategrey;
+    background-color: #9c8969;
     margin: auto;
     max-width: 800px;
+    background-image: url(../img/BBWeb.jpg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    font-family: sans-serif;
+}
+
+h1, p {
+    color: white;
+    text-shadow: 4px 4px 5px #780606;
+    background-color: rgba(88, 88, 88, .7);
+    border-radius: .2em;
+    text-align: center;
+}
+
+hr {
+    box-shadow: 4px 4px 5px #780606
 }
 
 .input-field {
     width: 800px;
+    background-color: rgba(88, 88, 88, .7);
+    border-radius: .2em;
+    border: none;
 }
 
 .input-button {
     color: white;
     background-color: black;
-    border-radius: 1em;
+    border-radius: .3em;
 }
 
-table, th, td {
-    border: 1px solid slateblue;
-    background-color: black;
+th, td {
+    border: 1px solid #780606;
     color: white;
+}
+td {
+    background-color: rgba(88, 88, 88, .7);
 }
 
 .hide {
@@ -27,7 +48,10 @@ table, th, td {
 
 textarea {
     resize: none;
-  }
+    color: white;
+}
+
+
 
 /*
 * Responsive Layouts
