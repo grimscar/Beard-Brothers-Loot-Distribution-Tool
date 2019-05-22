@@ -160,10 +160,15 @@ function parse(inputData, parseRegex){
 
     //go through the array and split each element into its own array based on p
     for (let i = 0; i < output.length; i++){
-        if (output[i].includes("Treasure") || output[i].includes("treasure"))
+        debugger;
+        if (output[i].includes("Treasure Map") || output[i].includes("treasure map"))
         {
             let tempString = output[i];
-            output[i] = tempString.split(/^You see: (\w+ drawn treasure map: level \d+)$/);
+            output[i] = tempString.split(/^You see: /);
+            output[i].push(1);
+            output[i].push("");
+
+            console.log(output);
         }
         else {
             let tempString = output[i];
@@ -176,6 +181,9 @@ function parse(inputData, parseRegex){
 //Checks each item in array to make sure its on the item list and it fixes quantities
 function isOnLootTable(array){
     let output = [];
+
+
+
 
    array.forEach(element => {
         //make sure there is an item
