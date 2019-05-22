@@ -165,7 +165,7 @@ function parse(inputData, parseRegex){
         {
             let tempString = output[i];
             output[i] = tempString.split(/^You see: /);
-            output[i].push(1);
+            output[i].push("");
             output[i].push("");
 
             console.log(output);
@@ -181,8 +181,6 @@ function parse(inputData, parseRegex){
 //Checks each item in array to make sure its on the item list and it fixes quantities
 function isOnLootTable(array){
     let output = [];
-
-
 
 
    array.forEach(element => {
@@ -201,9 +199,8 @@ function isOnLootTable(array){
                     element.push(item[1]);
 
 
-                    
                     //any undfined at element[2] should be a 1 instead, they just dont have a quantity when read
-                    if (element[2] == undefined){
+                    if (element[2] == undefined || element[2] == NaN || element[2] == ""){
                         element[2] = 1;
                     }
                     
