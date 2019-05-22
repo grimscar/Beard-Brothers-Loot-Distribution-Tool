@@ -7,7 +7,8 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     //get the text from the input field
     let inputData = document.querySelector("#input-journal").value;
     
-    let parseRegex = /^You see: ([^0-9]+\b) ?:? ?(\d+)?$/;
+    let parseRegex = /^You see: (.+) ?:? ?(\d+)?$/;
+  
     //This function returns the table want to show
     let dataArray = parse(inputData, parseRegex);
 
@@ -159,8 +160,15 @@ function parse(inputData, parseRegex){
 
     //go through the array and split each element into its own array based on p
     for (let i = 0; i < output.length; i++){
-        let tempString = output[i];
-        output[i] = tempString.split(parseRegex);
+        if (output[1].includes("Treasure") || output[1].includes("treasure"))
+        {
+            let tempString = output[i];
+            output[i] = tempString.split(/^You see: (\w+) drawn treasure map: level (\d+)$/);
+        }
+        else {
+            let tempString = output[i];
+            output[i] = tempString.split(parseRegex);
+        }        
     }
     return output;
 }
@@ -168,8 +176,6 @@ function parse(inputData, parseRegex){
 //Checks each item in array to make sure its on the item list and it fixes quantities
 function isOnLootTable(array){
     let output = [];
-
-    debugger;
 
    array.forEach(element => {
         //make sure there is an item
@@ -404,6 +410,7 @@ You see: carpentry skill mastery scroll
 You see: remove trap skill mastery scroll : 2
 You see: Copper Ore Map
 You see: Adeptly Drawn Fishing Map
+You see: Plainly Drawn Treasure Map: Level 1
 
 Jim, Bob, Sue, Lemy, Jake, Fox
 
