@@ -20,6 +20,13 @@ hr {
     box-shadow: 4px 4px 5px #780606
 }
 
+footer {
+    color: white;
+}
+a:visited {
+    color: red;
+}
+
 .input-field {
     width: 800px;
     background-color: rgba(88, 88, 88, .7);
