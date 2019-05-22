@@ -8,7 +8,7 @@ document.querySelector('#bJournal').addEventListener('click', function(event){
     let inputData = document.querySelector("#input-journal").value;
     
     let parseRegex = /^You see: ([^:0-9]+\b) ?:? ?(\d+)?$/;
-    
+
     //This function returns the table want to show
     let dataArray = parse(inputData, parseRegex);
 
@@ -160,7 +160,7 @@ function parse(inputData, parseRegex){
 
     //go through the array and split each element into its own array based on p
     for (let i = 0; i < output.length; i++){
-        if (output[1].includes("Treasure") || output[1].includes("treasure"))
+        if (output[i].includes("Treasure") || output[i].includes("treasure"))
         {
             let tempString = output[i];
             output[i] = tempString.split(/^You see: (\w+ drawn treasure map: level \d+)$/);
