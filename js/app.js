@@ -116,28 +116,6 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
     
 });
 
-// Old event listener, kept for Archival purpose
-/*
-document.querySelector('#bRollem').addEventListener('click', function(event){
-    //get the text from the input field
-    let inputData = document.querySelector("#input-rollem").value;
-    
-    //let parseRegex = " "
-    let parseRegex = /^@(.+), \d+ ⟵ \[(\d+)\]\d+d\d+$/;
-    
-    let dataArray = parse(inputData, parseRegex);
-
-    //Sort the array by highest roll
-    dataArray = bubbleSortXDArray(dataArray,1);
-
-    //This function returns the table want to show
-    let childAppend = makeTable(dataArray);
-    
-    addTable(childAppend, document.getElementById('output-rollem'));
-    document.getElementById('d-input-rollem).classList.add("hide");
-});
-*/
-
 //change the table to show instead of the input field
 function toggleInputTableVisibility(elementToHide){
     
@@ -191,38 +169,44 @@ function parse(inputData, parseRegex){
 function isOnLootTable(array){
     let output = [];
 
+    debugger;
+
    array.forEach(element => {
-        //check to see if the item is on the list
-        let toAdd = false;
-        
-        //Loops through the item list looking for a match
-        itemList.forEach(item =>  {
-            if (element[1] == item[0] || element[1] == item[0] + " ")
-            {
-                //if we find a match we want to add it
-                toAdd = true;
-                element.push(item[1]);
+        //make sure there is an item
+        if (element.length > 1){
+
+            //check to see if the item is on the list
+            let toAdd = false;
+
+            //Loops through the item list looking for a match
+            itemList.forEach(item =>  {
+                if (element[1].toLowerCase() == item[0].toLowerCase() || element[1].toLowerCase() == item[0].toLowerCase() + " ")
+                {
+                    //if we find a match we want to add it
+                    toAdd = true;
+                    element.push(item[1]);
 
 
-                
-                //any undfined at element[2] should be a 1 instead, they just dont have a quantity when read
-                if (element[2] == undefined){
-                    element[2] = 1;
-                }
-                
-                //if the item is already on the output list, we just want to add the quantity
-                output.forEach(line => {
-                    if (line[1] == element[1])
-                    {
-                        line[2] = parseInt(line[2]) + parseInt(element[2]);
-                        toAdd = false;
+                    
+                    //any undfined at element[2] should be a 1 instead, they just dont have a quantity when read
+                    if (element[2] == undefined){
+                        element[2] = 1;
                     }
-                });
-                if (toAdd){                    
-                    output.push(element);
+                    
+                    //if the item is already on the output list, we just want to add the quantity
+                    output.forEach(line => {
+                        if (line[1] == element[1])
+                        {
+                            line[2] = parseInt(line[2]) + parseInt(element[2]);
+                            toAdd = false;
+                        }
+                    });
+                    if (toAdd){                    
+                        output.push(element);
+                    }
                 }
-            }
-        });
+            });
+        }
    });
    return output;
 }
@@ -395,6 +379,10 @@ Line 2 is for single items.
 
 This raw paste could contain several single items as well such as research notes, they don't stack
 thus will never have a " : #" format on them.
+
+
+TEST CASES:
+______________________________________
 
 You see: A Skill Mastery Orb : 2
 You see: Poison Aspect Core : 2
