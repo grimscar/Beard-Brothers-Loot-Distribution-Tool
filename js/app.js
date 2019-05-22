@@ -79,62 +79,35 @@ document.querySelector('#bRollem').addEventListener('click', function(event){
     //loop selector
     let loopA = true;
     let itemIndex = 0;
-    debugger;
 
     while (itemsLeft > 0){
-        //check if its a high value item
-        if (parseInt(activeLoot[itemIndex][4]) >= 1000){
-            if (loopA){
-                debugger;
-                for (let i = 0; i < playerArray.length; i++){
-                    debugger;
-                    if (!(parseInt(activeLoot[itemIndex][4]) >= 1000) && itemsLeft > 0)
-                    {break;}
-                    //each player gets one piece of loot in order of their rolls
-                    debugger;
-                    playerArray[i].push(activeLoot[itemIndex][1]);
-                    itemIndex = parseInt(itemIndex) +1;
-                    itemsLeft = parseInt(itemsLeft) -1;
-                    console.log(itemIndex + " " + itemsLeft);
-                    debugger;         
-                }
-                loopA = false;
-                debugger;
+        if (loopA){
+            for (let i = 0; i < playerArray.length; i++){
+                if (itemsLeft == 0) { break; }
+
+                //each player gets one piece of loot in order of their rolls
+                playerArray[i].push(activeLoot[itemIndex][1]);
+                itemIndex = parseInt(itemIndex) +1;
+                itemsLeft = parseInt(itemsLeft) -1;
             }
-            else {
-                for (let x = playerArray.length-1; x >= 0; x--){
-                    debugger;
-                    let currentItemValue = parseInt(activeLoot[itemIndex][4]); 
-                    if (!(currentItemValue >= 1000) && itemsLeft > 0)
-                    {break;}
-                    //each player gets one piece of loot in order of their rolls
-                    debugger;
-                    playerArray[x].push(activeLoot[itemIndex][1]);
-                    itemIndex = parseInt(itemIndex) +1;
-                    itemsLeft = parseInt(itemsLeft) -1;
-                    console.log(itemIndex + " " + itemsLeft);
-                    debugger;
-                }
-                loopA = true;
-            }
-            debugger;
+            loopA = false;
         }
-        //distribute low value items
-        else{
-            let rand = Math.floor(Math.random()*playerArray.length);
-            playerArray[rand].push(activeLoot[itemIndex][1]);
-            itemIndex = parseInt(itemIndex) +1;
-            itemsLeft = parseInt(itemsLeft) -1;
-            console.log(itemIndex + " " + itemsLeft);
-            debugger;
+        else {
+            for (let x = playerArray.length-1; x >= 0; x--){
+                if (itemsLeft == 0) { break; }
+
+                //each player gets one piece of loot in order of their rolls
+                playerArray[x].push(activeLoot[itemIndex][1]);
+                itemIndex = parseInt(itemIndex) +1;
+                itemsLeft = parseInt(itemsLeft) -1;
+            }
+            loopA = true;
         }
     }
-    debugger;
 
 
     let childAppend = makeTable(playerArray);
     addTable(childAppend, document.getElementById('output-rollem'));
-    debugger;
     document.getElementById('d-input-rollem').classList.add("hide");
     
 });
