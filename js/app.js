@@ -251,7 +251,6 @@ function bubbleSortXDArray(arr, index){
 //itemList[1] - value
 
 var itemList = [
-    var itemList = [
 ["A Skill Mastery Orb",45000],
 ["Mastercrafting Diagram",50000],
 ["Research Materials",30000],
