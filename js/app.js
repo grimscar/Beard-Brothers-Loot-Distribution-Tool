@@ -377,7 +377,6 @@ var itemList = [
 ["Avarhide Skinning Map",15000]
 ];
 
-
 /* Item list that needs REGEX setup to pull from.
 
 ^You see: (.+) : (\d+)$   This regex would match line 1
